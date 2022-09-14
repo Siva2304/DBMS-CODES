@@ -1,0 +1,116 @@
+mysql> create database ta1;
+Query OK, 1 row affected (0.01 sec)
+mysql> use ta1;
+Database changed
+mysql> create table ticket(Ticket_No int(9),Age int(4), Sex varchar(10), Source varchar(10),Destination varchar(10), Dep_time varchar(10), Bus_no int(10));
+Query OK, 0 rows affected, 3 warnings (0.06 sec)
+
+mysql> alter table ticket add primary key(Ticket_No);
+Query OK, 0 rows affected (0.11 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe ticket;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| Ticket_No   | int         | NO   | PRI | NULL    |       |
+| Age         | int         | YES  |     | NULL    |       |
+| Sex         | varchar(10) | YES  |     | NULL    |       |
+| Source      | varchar(10) | YES  |     | NULL    |       |
+| Destination | varchar(10) | YES  |     | NULL    |       |
+| Dep_time    | varchar(10) | YES  |     | NULL    |       |
+| Bus_no      | int         | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+mysql> insert into ticket values(2,19,'male','london','america','8:50',30),(3,19,'male','london','america','8:40',30),(4,29,'male','london','america','8:30',50),(8,19,'female','paris','america','8:20',40),(12,19,'female','paris','america','9:50',300),(22,19,'female','paris','america','7:50',70);
+Query OK, 6 rows affected (0.04 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> select * from ticket;
++-----------+------+--------+--------+-------------+----------+--------+
+| Ticket_No | Age  | Sex    | Source | Destination | Dep_time | Bus_no |
++-----------+------+--------+--------+-------------+----------+--------+
+|         1 |   18 | male   | father | avadi       | 8:40     |     20 |
+|         2 |   19 | male   | london | america     | 8:50     |     30 |
+|         3 |   19 | male   | london | america     | 8:40     |     30 |
+|         4 |   29 | male   | london | america     | 8:30     |     50 |
+|         8 |   19 | female | paris  | america     | 8:20     |     40 |
+|        12 |   19 | female | paris  | america     | 9:50     |    300 |
+|        22 |   19 | female | paris  | america     | 7:50     |     70 |
++-----------+------+--------+--------+-------------+----------+--------+
+7 rows in set (0.00 sec)
+
+mysql> select Ticket_No from ticket;
++-----------+
+| Ticket_No |
++-----------+
+|         1 |
+|         2 |
+|         3 |
+|         4 |
+|         8 |
+|        12 |
+|        22 |
++-----------+
+7 rows in set (0.00 sec)
+
+mysql> select  * from ticket where Sex='male';
++-----------+------+------+--------+-------------+----------+--------+
+| Ticket_No | Age  | Sex  | Source | Destination | Dep_time | Bus_no |
++-----------+------+------+--------+-------------+----------+--------+
+|         1 |   18 | male | father | avadi       | 8:40     |     20 |
+|         2 |   19 | male | london | america     | 8:50     |     30 |
+|         3 |   19 | male | london | america     | 8:40     |     30 |
+|         4 |   29 | male | london | america     | 8:30     |     50 |
++-----------+------+------+--------+-------------+----------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select Dep_time from ticket;
++----------+
+| Dep_time |
++----------+
+| 8:40     |
+| 8:50     |
+| 8:40     |
+| 8:30     |
+| 8:20     |
+| 9:50     |
+| 7:50     |
++----------+
+7 rows in set (0.00 sec)
+
+mysql> select * from ticket where Source='london' or 'paris';
++-----------+------+------+--------+-------------+----------+--------+
+| Ticket_No | Age  | Sex  | Source | Destination | Dep_time | Bus_no |
++-----------+------+------+--------+-------------+----------+--------+
+|         2 |   19 | male | london | america     | 8:50     |     30 |
+|         3 |   19 | male | london | america     | 8:40     |     30 |
+|         4 |   29 | male | london | america     | 8:30     |     50 |
++-----------+------+------+--------+-------------+----------+--------+
+3 rows in set, 1 warning (0.04 sec)
+
+mysql> select * from ticket where Source='london'or'paris';
++-----------+------+------+--------+-------------+----------+--------+
+| Ticket_No | Age  | Sex  | Source | Destination | Dep_time | Bus_no |
++-----------+------+------+--------+-------------+----------+--------+
+|         2 |   19 | male | london | america     | 8:50     |     30 |
+|         3 |   19 | male | london | america     | 8:40     |     30 |
+|         4 |   29 | male | london | america     | 8:30     |     50 |
++-----------+------+------+--------+-------------+----------+--------+
+3 rows in set, 1 warning (0.00 sec)
+
+mysql> select * from tickets;
+ERROR 1146 (42S02): Table 'ta1.tickets' doesn't exist
+mysql> select * from ticket;
++-----------+------+--------+--------+-------------+----------+--------+
+| Ticket_No | Age  | Sex    | Source | Destination | Dep_time | Bus_no |
++-----------+------+--------+--------+-------------+----------+--------+
+|         1 |   18 | male   | father | avadi       | 8:40     |     20 |
+|         2 |   19 | male   | london | america     | 8:50     |     30 |
+|         3 |   19 | male   | london | america     | 8:40     |     30 |
+|         4 |   29 | male   | london | america     | 8:30     |     50 |
+|         8 |   19 | female | paris  | america     | 8:20     |     40 |
+|        12 |   19 | female | paris  | america     | 9:50     |    300 |
+|        22 |   19 | female | paris  | america     | 7:50     |     70 |
++-----------+------+--------+--------+-------------+----------+--------+
+7 rows in set (0.00 sec)
